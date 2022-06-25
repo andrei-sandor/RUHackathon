@@ -8,12 +8,14 @@ def username_match(username):
         return True
     return False
 
+
 def account_match(username, password):
     search_user_sql = ("SELECT * FROM user WHERE username = ? AND password = ?")
     cursor.execute(search_user_sql, [(username), (password)])
     if len(cursor.fetchall()) == 1:
         return True
     return False
+
 
 def register_user():
     username = input("Enter a new username: ")
@@ -35,10 +37,10 @@ def register_user():
 
         if patient_code == "P":
             register_patient()
-        else:
-            register_doctor()
+
 
 def register_patient(username):
+    
     age = input("Enter your age: ")
     sex = input("Enter your sex: ")
     chestPainType = input("Enter your chest pain type [TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic]: ")
@@ -52,15 +54,15 @@ def register_patient(username):
     stSlope = input("Enter you slope of the peak exercise ST segment [Up: upsloping, Flat: flat, Down: downsloping]: ")
 
     ALT = input("Enter the value of your ALT: ")
-    IgM = input("Enter yes if you have IgM: ")
-    HBsAg = input("Enter yes if you have HBsAg: ")
-    HBcAg = input("Enter yes if you have HBcAg: ")
-    HBsAb = input("Enter yes if you have HBsAb: ")
-    NCV = input("Enter yes if you have NCV: ")
-    rateOfFatigue = input("Enter you rate of fatigue (High or Normal: ")
-    nausea = input("Enter yes if you have nausea: ")
+    IgM = input("Enter Y if you have IgM and N if you do not: ")
+    HBsAg = input("Enter Y if you have HBsAg and N if you do not: ")
+    HBcAg = input("Enter Y if you have HBcAg and N if you do not: ")
+    HBsAb = input("Enter Y if you have HBsAb and N if you do not: ")
+    NCV = input("Enter Y if you have NCV and N if you do not: ")
+    rateOfFatigue = input("Enter H for a high rate of fatigue or N for Normal: ")
+    nausea = input("Enter Y if you have nausea and N if you do not: ")
     abdominalPain = input("Enter on a scale from 1 to 10 how much abdominal pain you have: ")
-    urine = input("Enter the color of your urine (Dark or Normal: ")
+    urine = input("Enter D if you have dark urine or N if it is a normal colour: ")
     
     register_patient_sql = """INSERT INTO patient(age, sex, chestPainType, restingBP, cholesterol, fastingBS, restingECG, maxHR,
                                 exerciseAngina, oldpeak, stSlope, ALT, IgM, HBsAg, HBcAg, HBsAg, NCV, rateOfFatigue, nausea, abdominalPain, urine, userID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"""
@@ -69,8 +71,6 @@ def register_patient(username):
     db.commit()
     print("Patient account created. Welcome!")
     
-def register_doctor():
-    pass
 
 def login_user():
     username = input("Enter a username")

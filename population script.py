@@ -27,6 +27,18 @@ with sqlite3.connect("UserData.db") as db:
     exerciseAngina CHAR NOT NULL,
     oldpeak VARCHAR(10) NOT NULL,
     stSlope VARCHAR(4) NOT NULL,
+
+    ALT INTEGER NOT NULL,
+    IgM CHAR NOT NULL,
+    HBsAg CHAR NOT NULL,
+    HBcAg CHAR NOT NULL,
+    HBsAb CHAR NOT NULL,
+    NCV CHAR NOT NULL,
+    rateOfFatigue CHAR NOT NULL,
+    nausea CHAR NOT NULL,
+    abdominalPain INTEGER NOT NULL,
+    urine CHAR NOT NULL,
+    
     username VARCHAR(20) PRIMARY KEY,
     FOREIGN KEY(username) REFERENCES user(username));
     ''')
