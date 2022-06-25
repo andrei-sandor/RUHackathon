@@ -30,22 +30,19 @@ def register():
         db.commit()
         print("Account created. Welcome!")
 
-
-def startup():
-    with sqlite3.connect("PatientData.db") as db:
-        cursor = db.cursor()
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS user(
-        userID INTEGER PRIMARY KEY,
-        
-        username VARCHAR(20) NOT NULL,
-        firstname VARCHAR(20) NOT NULL,
-        surname VARCHAR(20) NOT NULL,
-        password VARCHAR(20) NOT NULL);
-        ''')
+with sqlite3.connect("PatientData.db") as db:
+    cursor = db.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS user(
+    userID INTEGER PRIMARY KEY,
+    
+    username VARCHAR(20) NOT NULL,
+    firstname VARCHAR(20) NOT NULL,
+    surname VARCHAR(20) NOT NULL,
+    password VARCHAR(20) NOT NULL);
+    ''')
 
 
 ## testing
-startup()
 username = "newUser12"
 assert(match_username(username)==[])
