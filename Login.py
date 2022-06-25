@@ -1,5 +1,7 @@
 import sqlite3
 
+from liver import HBsAb
+
 def match_username(username):
     search_user_sql = "SELECT * FROM user WHERE username = ?"
     cursor.execute(search_user_sql,[(username)])
@@ -46,9 +48,21 @@ def register_patient(username):
     oldpeak = input("Enter your oldpeak = ST [Numeric value measured in depression]: ")
     stSlope = input("Enter you slope of the peak exercise ST segment [Up: upsloping, Flat: flat, Down: downsloping]: ")
 
+    ALT = input("Enter the value of your ALT: ")
+    IgM = input("Enter yes if you have IgM: ")
+    HBsAg = input("Enter yes if you have HBsAg: ")
+    HBcAg = input("Enter yes if you have HBcAg: ")
+    HBsAb = input("Enter yes if you have HBsAb: ")
+    NCV = input("Enter yes if you have NCV: ")
+    rateOfFatigue = input("Enter you rate of fatigue (High or Normal: ")
+    nausea = input("Enter yes if you have nausea: ")
+    abdominalPain = input("Enter on a scale from 1 to 10 how much abdominal pain you have: ")
+    urine = input("Enter the color of your urine (Dark or Normal: ")
+    
     register_patient_sql = """INSERT INTO patient(age, sex, chestPainType, restingBP, cholesterol, fastingBS, restingECG, maxHR,
-                                exerciseAngina, oldpeak, stSlope, userID) VALUES(?,?,?,?,?,?,?,?,?,?,?)"""
-    cursor.execute(register_patient_sql, [(age), (sex), (chestPainType), (restingBP), (cholesterol), (fastingBS), (restingECG), (maxHR), (exerciseAngina), (oldpeak), (stSlope), (username)])
+                                exerciseAngina, oldpeak, stSlope, ALT, IgM, HBsAg, HBcAg, HBsAg, NCV, rateOfFatigue, nausea, abdominalPain, urine, userID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"""
+    cursor.execute(register_patient_sql, [(age), (sex), (chestPainType), (restingBP), (cholesterol), (fastingBS), (restingECG), (maxHR), (exerciseAngina), (oldpeak), (stSlope)
+                                          ,(ALT), (IgM), (HBsAg), (HBcAg), (HBsAb), (NCV), (rateOfFatigue), (nausea), (abdominalPain), (urine), (username)])
     db.commit()
     print("Patient account created. Welcome!")
     
