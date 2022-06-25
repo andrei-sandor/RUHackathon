@@ -12,31 +12,31 @@ import sqlite3
 #For hepatitisB, HBsAg and HBcAb found you are ingected. If you have HBsAb you are protected.
 #For hepatitis C, reactive HCV antibody you have it, else (non-reactive), you are good
 
-# db = sqlite3.connect("UserData.db")
-# cursor = db.cursor()
-# data = cursor.fetchall()
+db = sqlite3.connect("UserData.db")
+cursor = db.cursor()
+data = cursor.fetchall()
 
-# ALT = data[11]
-# IgM = data[12]
-# HBsAg = data[13]
-# HBcAb = data[14]
-# HBsAb = data[15]
-# NCV = data[16]
-# rateOfFatigue = data[17]
-# nausea = data[18]
-# abdominalPain =  data[19]
-# urine = data[20]
+ALT = data[11]
+IgM = data[12]
+HBsAg = data[13]
+HBcAb = data[14]
+HBsAb = data[15]
+NCV = data[16]
+rateOfFatigue = data[17]
+nausea = data[18]
+abdominalPain =  data[19]
+urine = data[20]
 
-ALT = 37
-IgM = 'Y'
-HBsAg ='N'
-HBcAb = 'N'
-HBsAb = 'Y'
-NCV = 'Y'
-rateOfFatigue = 'H'
-nausea = 'Y'
-abdominalPain =  3
-urine = 'D'
+# ALT = 37
+# IgM = 'Y'
+# HBsAg ='N'
+# HBcAb = 'N'
+# HBsAb = 'Y'
+# NCV = 'Y'
+# rateOfFatigue = 'H'
+# nausea = 'Y'
+# abdominalPain =  3
+# urine = 'D'
 
 if(ALT > 36):
     print("Because you have ALT > 36, you have a liver problem.")
@@ -60,4 +60,4 @@ if(urine == "D"):
     print("Investigate more for that dark urine.")
 
     
-# cursor.close()
+cursor.close()
