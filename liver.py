@@ -1,19 +1,8 @@
-#if(ALT > 36):you have a liber problem
-#AST
-
 import sqlite3
-
-#Rate of fatigue
-#Nausea and vomiting
-#Abdominal pain
-#urine color (Dark is bad)
-
-#For hepatitsA, IgM antiboundies found => yoiu have hepatits A, else no
-#For hepatitisB, HBsAg and HBcAb found you are ingected. If you have HBsAb you are protected.
-#For hepatitis C, reactive HCV antibody you have it, else (non-reactive), you are good
 
 db = sqlite3.connect("UserData.db")
 cursor = db.cursor()
+cursor.execute(FROM table SELECT column)
 data = cursor.fetchall()
 
 ALT = data[11]
