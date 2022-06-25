@@ -5,37 +5,35 @@ def match_username(username):
     cursor.execute(search_user_sql,[(username)])
     return cursor.fetchall()
 
-
 def match_account(username, password):
     search_user_sql = ("SELECT * FROM user WHERE username = ? AND password = ?")
     cursor.execute(search_user_sql, [(username), (password)])
     return cursor.fetchall()
 
-
-def register():
+def register_user():
     username = input("Enter a new username: ")
     firstname = input("Enter your firstname: ")
     surname = input("Enter your surname: ")
     password = input("Enter a password: ")
-    ## add other information here
-    
+    user_type = input("Enter P for patient or D for doctor: ")
+
     if len(match_username(username)) != 0:
         print("Error: username taken")
+    elif user_type not in ["P" or "D"]:
+        print("Error: must enter P for patient or D for doctor")
 
-    ## other validations here
-        
     else:
-        create_user_sql = "INSERT INTO user(username, firstname, surname, password) VALUES(?,?,?,?)"
-        cursor.execute(create_user_sql, [(username), (firstname), (surname), (password)])
+        register_user_sql = "INSERT INTO user(username, firstname, surname, password) VALUES(?,?,?,?,?)"
+        cursor.execute(register_user_sql, [(username), (firstname), (surname), (password), (user_type)])
         db.commit()
-        print("Account created. Welcome!")
+        print("User account created. Welcome!")
 
-def inputHeart():
-    
-    connection = sqlite3.connect("HearthData.db")
-    
-    cursor = connection.cursor()
-    
+        if patient_code == "P":
+            register_patient()
+        else:
+            register_doctor()
+        
+def register_patient(username):
     age = input("Enter your age: ")
     sex = input("Enter your sex: ")
     chestPainType = input("Enter your chest pain type [TA: Typical Angina, ATA: Atypical Angina, NAP: Non-Anginal Pain, ASY: Asymptomatic]: ")
@@ -47,26 +45,41 @@ def inputHeart():
     exerciseAngina = input("Enter your exercise-induced angina [Y: Yes, N: No]: ")
     oldpeak = input("Enter your oldpeak = ST [Numeric value measured in depression]: ")
     stSlope = input("Enter you slope of the peak exercise ST segment [Up: upsloping, Flat: flat, Down: downsloping]: ")
-    
-    cursor.execute(age,sex,chestPainType,restingBP,cholesterol,fastingBS,restingECG,maxHR,exerciseAngina,oldpeak,stSlope)
-    print("Table Created")
-    connection.commit()
-    
-    
 
-with sqlite3.connect("PatientData.db") as db:
+    register_patient_sql = """INSERT INTO patient(age, sex, chestPainType, restingBP, cholesterol, fastingBS, restingECG, maxHR,
+                                exerciseAngina, oldpeak, stSlope, userID) VALUES(?,?,?,?,?,?,?,?,?,?,?)"""
+    cursor.execute(register_patient_sql, [(age), (sex), (chestPainType), (restingBP), (cholesterol), (fastingBS), (restingECG), (maxHR), (exerciseAngina), (oldpeak), (stSlope), (username)])
+    db.commit()
+    print("Patient account created. Welcome!")
+    
+def register_doctor():
+    pass
+
+with sqlite3.connect("UserData.db") as db:
     cursor = db.cursor()
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS user(
-    userID INTEGER PRIMARY KEY,
-    
-    username VARCHAR(20) NOT NULL,
+    username VARCHAR(20) PRIMARY KEY,
     firstname VARCHAR(20) NOT NULL,
     surname VARCHAR(20) NOT NULL,
-    password VARCHAR(20) NOT NULL);
+    password VARCHAR(20) NOT NULL,
+    user_type CHAR NOT NULL);
     ''')
 
-
-## testing
-username = "newUser12"
-assert(match_username(username)==[])
+    # check following datatypes are correct
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS patient(
+    age INTEGER NOT NULL,
+    sex CHAR NOT NULL,
+    chestPainType VARCHAR(3) NOT NULL,
+    restingBP INTEGER NOT NULL,
+    cholesterol VARCHAR(10) NOT NULL,
+    fastingBS VARCHAR(10) NOT NULL,
+    restingECG VARCHAR(6) NOT NULL,
+    maxHR INTEGER NOT NULL,
+    exerciseAngina CHAR NOT NULL,
+    oldpeak VARCHAR(10),
+    stSlope VARCHAR(4) NOT NULL,
+    username VARCHAR(20) PRIMARY KEY,
+    FOREIGN KEY(username) REFERENCES user(username));
+    ''')
