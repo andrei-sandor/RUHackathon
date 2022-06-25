@@ -64,7 +64,7 @@ def register_patient(username):
     abdominalPain = input("Enter on a scale from 1 to 10 how much abdominal pain you have: ")
     urine = input("Enter D if you have dark urine or N if it is a normal colour: ")
     
-    pregnancies = input("Enter the number of times pregnant: ")
+    pregnancies = input("Enter Y if you plan to be pregnant: ")
     glucose = input("Enter the plasma glucose concentration for 2 hours in an oral glucose tolerance test: ")
     bloodPressure = input("Enter your diastolic blood pressure (mm Hg): ")
     skinThickness = input("Enter your triceps skin fold thickness (mm): ")
