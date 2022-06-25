@@ -1,6 +1,9 @@
 #if(ALT > 36):you have a liber problem
 #AST
 
+import sqlite3
+import Login.py
+
 #Rate of fatigue
 #Nausea and vomiting
 #Abdominal pain
@@ -10,16 +13,20 @@
 #For hepatitisB, HBsAg and HBcAb found you are ingected. If you have HBsAb you are protected.
 #For hepatitis C, reactive HCV antibody you have it, else (non-reactive), you are good
 
-ALT = SELECT ALT FROM patient
-IgM = SELECT IgM FROM patient
-HBsAg = SELECT HBsAg FROM patient
-HBcAb = SELECT HBcAb FROM patient
-HBsAb = SELECT HBsAb FROM patient
-NCV = SELECT NCV FROM patient
-rateOfFatigue = SELECT rateOfFatigue FROM patient
-nausea = SELECT nausea FROM patient
-abdominalPain =  SELECT abdominalPain FROM patient
-urine = SELECT urine FROM patient
+db = sqlite3.connect("UserData.db")
+cursor = db.cursor()
+data = cursor.fetchall()
+
+ALT = data[11]
+IgM = data[12]
+HBsAg = data[13]
+HBcAb = data[14]
+HBsAb = data[15]
+NCV = data[16]
+rateOfFatigue = data[17]
+nausea = data[18]
+abdominalPain =  data[19]
+urine = data[20]
 
 
 if(alt > 36):
@@ -46,4 +53,4 @@ else:
     else:
         print("Take care of yourself. You are fine!")
     
-
+cursor.close()
