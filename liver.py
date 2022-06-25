@@ -2,7 +2,6 @@
 #AST
 
 import sqlite3
-import Login.py
 
 #Rate of fatigue
 #Nausea and vomiting
@@ -29,27 +28,27 @@ abdominalPain =  data[19]
 urine = data[20]
 
 
-if(alt > 36):
+if(ALT > 36):
     print("You have a liver problem.")
-    if(IgM == "yes"):
+    if(IgM == "Y"):
         print("You have hepatitis A. There is no treatment. Rest and take painkillers.")
-    if(HBsAg == "yes"):
+    if(HBsAg == "Y"):
         print("You are safe against hepatitis B.")
-    if((HBsAg == "no") and ((HBsAg == "yes") or (HBcAb == "yes"))):
+    if((HBsAg == "N") and ((HBsAg == "Y") or (HBcAb == "Y"))):
         print("You have hepatitis B. Take a pil of Viread once a day for at least one year")
-    if(HCV == "yes"):
+    if(NCV == "Y"):
         print("You have hepatitis C. Take a pil of Daklinza for a few weeks.")
-    if(HCV == "no"):
+    if(NCV == "N"):
         print("You don't have hepatitis C.")
 else:
-    if(rateOfFatigue == "Fast"):
+    if(rateOfFatigue == "H"):
         print("Try to rest. Go in bed. Sleep more")
-    if(nausea == "yes"):
+    if(nausea == "yY"):
         print("Take Zofran until you don't have nausea.")
     if(abdominalPain > 5):
         print("Rest.")
-    if(urine == "Dark"):
-        print("Take")
+    if(urine == "D"):
+        print("Investigate more")
     else:
         print("Take care of yourself. You are fine!")
     
