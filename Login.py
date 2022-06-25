@@ -1,16 +1,19 @@
 import sqlite3
-
 from liver import HBsAb
 
-def match_username(username):
+def username_match(username):
     search_user_sql = "SELECT * FROM user WHERE username = ?"
     cursor.execute(search_user_sql,[(username)])
-    return cursor.fetchall()
+    if len(cursor.fetchall()) == 1:
+        return True
+    return False
 
-def match_account(username, password):
+def account_match(username, password):
     search_user_sql = ("SELECT * FROM user WHERE username = ? AND password = ?")
     cursor.execute(search_user_sql, [(username), (password)])
-    return cursor.fetchall()
+    if len(cursor.fetchall()) == 1:
+        return True
+    return False
 
 def register_user():
     username = input("Enter a new username: ")
@@ -19,7 +22,7 @@ def register_user():
     password = input("Enter a password: ")
     user_type = input("Enter P for patient or D for doctor: ")
 
-    if len(match_username(username)) != 0:
+    if not username_match:
         print("Error: username taken")
     elif user_type not in ["P" or "D"]:
         print("Error: must enter P for patient or D for doctor")
@@ -34,7 +37,7 @@ def register_user():
             register_patient()
         else:
             register_doctor()
-        
+
 def register_patient(username):
     age = input("Enter your age: ")
     sex = input("Enter your sex: ")
@@ -68,6 +71,17 @@ def register_patient(username):
     
 def register_doctor():
     pass
+
+def login_user():
+    username = input("Enter a username")
+    password = input("Enter a password")
+    if not username_match(username):
+        print("Username not recognised. Please try again")
+    elif not account_match(username, password):
+        print("Password is incorrect. Please try again")
+    else:
+        global username
+
 
 db = sqlite3.connect("UserData.db")
 cursor = db.cursor()
