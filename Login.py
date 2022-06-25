@@ -64,10 +64,18 @@ def register_patient(username):
     abdominalPain = input("Enter on a scale from 1 to 10 how much abdominal pain you have: ")
     urine = input("Enter D if you have dark urine or N if it is a normal colour: ")
     
+    pregnancies = input("Enter the number of times pregnant: ")
+    glucose = input("Enter the plasma glucose concentration for 2 hours in an oral glucose tolerance test: ")
+    bloodPressure = input("Enter your diastolic blood pressure (mm Hg): ")
+    skinThickness = input("Enter your triceps skin fold thickness (mm): ")
+    insulin = input("Enter your 2-Hour serum insulin (mu U/ml): ")
+    BMI = input("Enter your body mass index (weight in kg/(height in m)^2): ")
+    
+    
     register_patient_sql = """INSERT INTO patient(age, sex, chestPainType, restingBP, cholesterol, fastingBS, restingECG, maxHR,
-                                exerciseAngina, oldpeak, stSlope, ALT, IgM, HBsAg, HBcAg, HBsAg, NCV, rateOfFatigue, nausea, abdominalPain, urine, userID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"""
+                                exerciseAngina, oldpeak, stSlope, ALT, IgM, HBsAg, HBcAg, HBsAg, NCV, rateOfFatigue, nausea, abdominalPain, urine, pregnancies, glucose, bloodPressure, skinThickness, insulin, BMI, userID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"""
     cursor.execute(register_patient_sql, [(age), (sex), (chestPainType), (restingBP), (cholesterol), (fastingBS), (restingECG), (maxHR), (exerciseAngina), (oldpeak), (stSlope)
-                                          ,(ALT), (IgM), (HBsAg), (HBcAg), (HBsAb), (NCV), (rateOfFatigue), (nausea), (abdominalPain), (urine), (username)])
+                                          ,(ALT), (IgM), (HBsAg), (HBcAg), (HBsAb), (NCV), (rateOfFatigue), (nausea), (abdominalPain), (urine), (pregnancies), (glucose), (bloodPressure), (skinThickness), (insulin), (BMI) (username)])
     db.commit()
     print("Patient account created. Welcome!")
     
