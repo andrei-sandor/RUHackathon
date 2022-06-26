@@ -4,12 +4,12 @@ db = sqlite3.connect("UserData.db")
 cursor = db.cursor()
 data = cursor.fetchall()
 
-# pregnancies = data[]
-# glucose = data[]
-# bloodPressure = data[]
-# skinThickness = data[]
-# insulin = data[]
-# BMI = data[]
+pregnancies = data[]
+glucose = data[]
+bloodPressure = data[]
+skinThickness = data[]
+insulin = data[]
+BMI = data[]
 
 if(glucose>200):
     print("You have diabetes. Your level of glucose is greater than 200 mg/dl. Use Sulfonylureas to make insulin more efficient.")
@@ -29,5 +29,6 @@ if(BMI > 30):
     print("Your BPI is too big. Change your lifestyle.")
 if(BMI <= 30):
     print("Your BPI is good, continue like this")    
+
     
 cursor.close()
