@@ -6,10 +6,10 @@
 Our inspiration is the high number of inadequate and incorrect medical treatments in out health care system.
 ## What it does
 
-This is a software where patients and doctors can login. The patient will answer some medical questions to detect if he has a disease. From there, he will receive an adequate treatment. The doctor can see the data available for his patient. The login page is very complex
+Created in a teams of 3 for the RUHackathon an application that takes as input medical messurements and predicts whether the person has a disease like heart diseases, diabetes and liver diseases. The user can access throught the command line the account and they can select which disease they want to be tested. There is a complex process to handle the data. Also, there is like an admin/doctor that can see the results and register the patient. There is functionality to handle the login.
 ## How we built it
 
-We build it with Python. We used extensively sqlite and machine learning
+To predict the disease, machine learning and simple Python logic was used to produce this project. For the machine learning model, RandomForestClassifier was used on 80/20 startegy on data This work was then integrated with a login.py file that deals with taking the inputs, calling the algorithms mentioned previously and producing the outputs. There is also a functionality to login, to logout and to use the application (enter input and have access to previous inputs/history) by using a sqlite database.
 ## Challenges we ran into
 
 We add some problems to connect the login page with the treatments algorithms.
